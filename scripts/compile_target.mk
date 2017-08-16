@@ -2,7 +2,7 @@
 CXX:=$(XS_CROSS_COMPILE)g++
 CC:=$(XS_CROSS_COMPILE)gcc
 
-LIBS=-lwiringPi -lc -lpthread
+LIBS=-lwiringPi -lasound -lc -lpthread
 INCLUDES=-I$(XS_INCLUDE)
 CXXFLAGS=-O2 -Wall -g
 LCXXFLAGS=-L$(XS_LIB)
@@ -19,10 +19,10 @@ $(TARGET):$(OBJS)
 	@rm -rf $(DEPS_TARGET) $(DEPS)
 
 %.o:%.cpp
-	$(CXX) $(INCLUDES) $@-c $< -o
+	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 
 %.o:%.c
-	$(CC) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
 
 %.d:%.cpp
 	@$(CXX) $(INCLUDES) $(DCXXFLAGS) $< >> $(DEPS_TARGET)

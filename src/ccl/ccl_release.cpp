@@ -20,7 +20,7 @@
 
 #include <stdlib.h>	/* free */
 
-#include "ccl.hpp"
+#include "ccl/ccl.hpp"
 
 static void
 ccl_bst_item_func(void *bst_item,

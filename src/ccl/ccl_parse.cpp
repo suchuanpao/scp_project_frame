@@ -24,7 +24,7 @@
 #include <ctype.h>	/* isspace */
 #include <errno.h>	/* ENOMEM, EINVAL, ENOENT */
 
-#include "ccl.hpp"
+#include "ccl/ccl.hpp"
 
 #define CCL_BUFSIZE 1024
 #define CCL_TOKSIZE 32

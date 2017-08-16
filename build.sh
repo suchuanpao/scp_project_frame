@@ -25,7 +25,7 @@
 #*   Description: ----
 #*          Mail: suchuanpao@outlook.com
 #*        Create: 2017-08-10 13:38:12
-#* Last Modified: 2017-08-15 10:08:58
+#* Last Modified: 2017-08-16 16:34:17
 #*  
 #************************************************************************
 source env.sh
@@ -47,7 +47,7 @@ HELP()
 	echo "# example:"
 	echo "#     $BUILD_FILE tests touchsense install"
 	echo "#     $BUILD_FILE tests touchsense clean"
-	echo "#     $BUILD_FILE app robots"
+	echo "#     $BUILD_FILE app asr"
 	echo "#     $BUILD_FILE app all"
 	echo "#     $BUILD_FILE lib all"
 	echo "#     $BUILD_FILE lib touchsense"
@@ -59,7 +59,7 @@ PROJ_TYPE=$1
 case $PROJ_TYPE in
 	tests)
 		PROJ=$2
-		if [ x'' != x$PROJ ]; then
+		if [[ -d $XS_PREFIX/$PROJ_TYPE/$PROJ && x'' != x$PROJ ]]; then
 			cd $XS_PREFIX/$PROJ_TYPE/$PROJ
 			MAKEFILE_OPT=$3
 			make $MAKEFILE_OPT
@@ -71,6 +71,7 @@ case $PROJ_TYPE in
 		PROJ_TYPE=src
 		PROJ=$2
 		if [[ -d $XS_PREFIX/$PROJ_TYPE/$PROJ && x'' != x$PROJ ]]; then
+			cd $XS_PREFIX/$PROJ_TYPE/$PROJ
 			MAKEFILE_OPT=$3
 			make $MAKEFILE_OPT
 		else
@@ -80,8 +81,16 @@ case $PROJ_TYPE in
 		fi
 		;;
 	app)
-		cd $PROJ_TYPE
-		make
+		PROJ=$2
+		if [[ -d $XS_PREFIX/$PROJ_TYPE/$PROJ && x'' != x$PROJ ]]; then
+			cd $XS_PREFIX/$PROJ_TYPE/$PROJ
+			MAKEFILE_OPT=$3
+			make $MAKEFILE_OPT
+		else
+			cd $XS_PREFIX/$PROJ_TYPE
+			MAKEFILE_OPT=$2
+			make $MAKEFILE_OPT
+		fi
 		;;
 	*)
 		HELP $0

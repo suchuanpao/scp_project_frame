@@ -24,7 +24,7 @@
  *   Description: ----
  *          Mail: suchuanpao@outlook.com
  *        Create: 2017-08-08 08:39:25
- * Last Modified: 2017-08-16 08:33:47
+ * Last Modified: 2017-08-16 15:50:30
  *  
  ************************************************************************/
 
@@ -72,7 +72,7 @@ static struct xs_wavesense_dev devs[] = {
     },
 };
 
-int timeval_subtract(struct timeval* result, struct timeval* x, struct timeval* y)
+static int timeval_subtract(struct timeval* result, struct timeval* x, struct timeval* y)
 {
     int nsec;
 
@@ -109,14 +109,15 @@ static void xs_wavesense_isr(void)
 static int xs_wavesense_request_irq(struct xs_wavesense_dev *dev)
 {
     int i = 0;
-    // 上锁保护这里，可以做到线程安全
+	// 同一时间只能有一个设备在请求中断
+    // lock
     for (i = 0; i < XS_WAVESENSE_MAX_DEVNUM; i++) {
-        if (devs[i].flag == XS_WAVESENSE_FLAG_WORKED || \
-            devs[i].flag == XS_WAVESENSE_FLAG_IRQ_OCCUR)
+        if (dev->flag == XS_WAVESENSE_FLAG_WORKED || \
+            dev->flag == XS_WAVESENSE_FLAG_IRQ_OCCUR)
             return -1;
     }
     dev->flag = XS_WAVESENSE_FLAG_WORKED;
-    // 解锁
+    // unlock
 }
 
 static int xs_wavesense_ready(struct xs_wavesense_dev *dev)

@@ -20,7 +20,8 @@
 #include <alsa/asoundlib.h>
 
 //#include "../../AiMain/include/AIMain.hpp"
-
+#include <alsa/pcm.h>
+#include <alsa/mixer.h>
 #include "asr/audioCapture.hpp"
 
 using namespace std;

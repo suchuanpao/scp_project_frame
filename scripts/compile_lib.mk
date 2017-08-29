@@ -23,6 +23,5 @@ $(DEPS_TARGET):$(DEPS)
 -include $(DEPS_TARGET)
 
 .PHONY : clean
-
 clean:
 	@rm -rf $(OBJS) $(TARGET) $(DEPS_TARGET)

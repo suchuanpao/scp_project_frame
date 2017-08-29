@@ -31,12 +31,12 @@
 #include <alsa/asoundlib.h> 
 
 #include "ccl/ccl.hpp"
-#include "common/common.hpp"
-#include "audioCapture.hpp"
+#include "common.hpp"
+#include "asr/audioCapture.hpp"
 
-#include "qisr.h"
-#include "msp_cmn.h"
-#include "msp_errors.h"
+#include "asr/qisr.h"
+#include "asr/msp_cmn.h"
+#include "asr/msp_errors.h"
 
 using namespace std;
 

@@ -1,3 +1,6 @@
 TARGET = asr
 SRCS = $(wildcard *.cpp)
-include $(XS_SCRIPTS)/compile_target.mk
+
+$(TARGET):bin
+
+include $(XS_SCRIPTS)/compile.mk

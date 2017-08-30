@@ -25,7 +25,7 @@
 #*   Description: ----
 #*          Mail: suchuanpao@outlook.com
 #*        Create: 2017-08-10 13:38:12
-#* Last Modified: 2017-08-16 16:34:17
+#* Last Modified: 2017-08-30 08:48:59
 #*  
 #************************************************************************
 source env.sh
@@ -40,17 +40,17 @@ HELP()
 	echo "# proj_type: { tests | app | lib | all }"
 	echo "#"
 	echo "# opt:"
-	echo "#     tests : [ module_name] { all | install | clean }"
-	echo "#       app : [ app_name ] | all"
-	echo "#       lib : [ lib_name ] | all (default)"
+	echo "#     tests : [ module_name] { | clean }"
+	echo "#       app : [ app_name ] { | clean }"
+	echo "#       lib : [ lib_name ] { | clean }"
 	echo "#"
 	echo "# example:"
-	echo "#     $BUILD_FILE tests touchsense install"
+	echo "#     $BUILD_FILE tests touchsense"
 	echo "#     $BUILD_FILE tests touchsense clean"
 	echo "#     $BUILD_FILE app asr"
-	echo "#     $BUILD_FILE app all"
-	echo "#     $BUILD_FILE lib all"
-	echo "#     $BUILD_FILE lib touchsense"
+	echo "#     $BUILD_FILE app asr clean"
+	echo "#     $BUILD_FILE lib"
+	echo "#     $BUILD_FILE lib clean"
 	echo "#"
 	echo "##############################################################################"
 }

@@ -8,4 +8,7 @@ SRCS := ccl/ccl_get.cpp \
 	sense/wavesense.cpp
 
 TARGET = $(XS_LIB)/libxs.a
-include $(XS_SCRIPTS)/compile_lib.mk
+
+$(TARGET):lib
+
+include $(XS_SCRIPTS)/compile.mk

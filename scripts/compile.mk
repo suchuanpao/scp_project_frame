@@ -1,4 +1,3 @@
-
 CXX:=$(XS_CROSS_COMPILE)g++
 CC:=$(XS_CROSS_COMPILE)gcc
 
@@ -12,11 +11,11 @@ OBJS=$(patsubst %.cpp, %.o, $(SRCS))
 DEPS=$(patsubst %.cpp, %.d, $(SRCS))
 DEPS_TARGET=$(XS_PREFIX)/deplists
 
--include $(DEPS_TARGET)
+bin:$(OBJS)
+	$(CXX) -o $(TARGET) $(OBJS) $(CXXFLAGS) $(LIBS) $(LCXXFLAGS)
 
-$(TARGET):$(OBJS)
-	$(CXX) -o $@ $(OBJS) $(CXXFLAGS) $(LIBS) $(LCXXFLAGS)
-	@rm -rf $(DEPS_TARGET) $(DEPS)
+lib:$(OBJS)
+	$(AR) rc $(TARGET) $(OBJS)
 
 %.o:%.cpp
 	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
@@ -30,9 +29,10 @@ $(TARGET):$(OBJS)
 %.d:%.c
 	@$(CC) $(INCLUDES) $(DCXXFLAGS) $< >> $(DEPS_TARGET)
 
-$(DEPS_TARGET):$(DEPS)
+ifneq ($(MAKECMDGOALS), clean)
+-include $(DEPS_TARGET)
+endif
 
 .PHONY : clean
-
 clean:
-	rm -rf $(OBJS) $(TARGET) $(DEPS_TARGET)
+	rm -rf $(DEPS_TARGET) $(TARGET) $(OBJS)

@@ -25,23 +25,35 @@
 #*   Description: ----
 #*          Mail: suchuanpao@outlook.com
 #*        Create: 2017-08-10 14:22:50
-#* Last Modified: 2017-08-16 09:42:51
+#* Last Modified: 2017-08-30 10:26:31
 #*  
 #***********************************************************************
 XS_CHIP=arm
 export XS_CHIP
+
 XS_CROSS_COMPILE=arm-linux-gnueabihf-
 export XS_CROSS_COMPILE
+
 XS_PREFIX=`pwd`
 export XS_PREFIX
+
 XS_LIB=$XS_PREFIX/lib
 export XS_LIB
+mkdir -p $XS_LIB
+
 XS_BIN=$XS_PREFIX/bin
 export XS_BIN
+mkdir -p $XS_BIN
+
 XS_SRC=$XS_PREFIX/src
 export XS_SRC
+mkdir -p $XS_SRC
+
 XS_INCLUDE=$XS_PREFIX/include
 export XS_INCLUDE
+mkdir -p $XS_INCLUDE
+
 XS_SCRIPTS=$XS_PREFIX/scripts
 export XS_SCRIPTS
+mkdir -p $XS_SCRIPTS
 

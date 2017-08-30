@@ -25,7 +25,7 @@
 #*   Description: ----
 #*          Mail: suchuanpao@outlook.com
 #*        Create: 2017-08-10 14:22:50
-#* Last Modified: 2017-08-30 10:26:31
+#* Last Modified: 2017-08-30 10:28:58
 #*  
 #***********************************************************************
 XS_CHIP=arm

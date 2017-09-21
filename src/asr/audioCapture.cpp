@@ -54,7 +54,7 @@ int volumeControl(long leftVol,long rightVol,long minVol,long maxVol)
 		mixerFd = NULL;
 	}
 
-	// ×¢²á»ìÒôÆ÷
+	// æ³¨å†Œæ··éŸ³å™¨
 	if ((result = snd_mixer_selem_register( mixerFd, NULL, NULL)) < 0)
 	{
 		printf("snd_mixer_selem_register error\n");
@@ -62,7 +62,7 @@ int volumeControl(long leftVol,long rightVol,long minVol,long maxVol)
 		mixerFd = NULL;
 	}
 
-	// ¼ÓÔØ»ìÒôÆ÷
+	// åŠ è½½æ··éŸ³å™¨
 	if ((result = snd_mixer_load( mixerFd)) < 0)
 	{
 		printf("snd_mixer_load error\n");
@@ -80,12 +80,12 @@ int volumeControl(long leftVol,long rightVol,long minVol,long maxVol)
 	if(rightVol<minVol)
 		rightVol = minVol;
 
-	//Ok, µ½ÏÖÔÚ×¼±¸¹¤×÷ÒÑ¾­Íê³É. ÏÂÃæÕÒµ½¾ßÌåµÄ»ìÒôÆ÷ÔªËØ,¾Í¿ÉÒÔ¿ØÖÆÒôÁ¿ÁË, Alsa±à³ÌµÄÈ·ºÜ¼òµ¥.
-	// ±éÀú»ìÒôÆ÷ÔªËØ
+	//Ok, åˆ°çŽ°åœ¨å‡†å¤‡å·¥ä½œå·²ç»å®Œæˆ. ä¸‹é¢æ‰¾åˆ°å…·ä½“çš„æ··éŸ³å™¨å…ƒç´ ,å°±å¯ä»¥æŽ§åˆ¶éŸ³é‡äº†, Alsaç¼–ç¨‹çš„ç¡®å¾ˆç®€å•.
+	// éåŽ†æ··éŸ³å™¨å…ƒç´ 
 	for(elem=snd_mixer_first_elem(mixerFd); elem; elem=snd_mixer_elem_next(elem))
 	{
 		if (snd_mixer_elem_get_type(elem) == SND_MIXER_ELEM_SIMPLE &&
-				  snd_mixer_selem_is_active(elem)) // ÕÒµ½¿ÉÒÔÓÃµÄ, ¼¤»îµÄelem
+				  snd_mixer_selem_is_active(elem)) // æ‰¾åˆ°å¯ä»¥ç”¨çš„, æ¿€æ´»çš„elem
 		{
 			printf(" name= %s\n",snd_mixer_selem_get_name(elem));
 			//if(QString(snd_mixer_selem_get_name(elem)) == "Master")
@@ -93,14 +93,14 @@ int volumeControl(long leftVol,long rightVol,long minVol,long maxVol)
 			//if(!(strcmp("Headphone",snd_mixer_selem_get_name(elem))))
 			//{
 			//	snd_mixer_selem_get_playback_volume_range(elem, &minVol, &maxVol);
-			//	snd_mixer_selem_set_playback_volume_all(elem, leftVol); // ÉèÖÃÒôÁ¿Îª50
+			//	snd_mixer_selem_set_playback_volume_all(elem, leftVol); // è®¾ç½®éŸ³é‡ä¸º50
 			//}
 
 
 			if(!(strcmp("AIF1 DAC timeslot 0 volume",snd_mixer_selem_get_name(elem))))
 			{
 				snd_mixer_selem_get_playback_volume_range(elem, &minVol, &maxVol);
-				snd_mixer_selem_set_playback_volume_all(elem, leftVol); // ÉèÖÃÒôÁ¿Îª50
+				snd_mixer_selem_set_playback_volume_all(elem, leftVol); // è®¾ç½®éŸ³é‡ä¸º50
 			}
 		}
 	}
@@ -257,7 +257,7 @@ snd_pcm_t* micHwInit(snd_pcm_access_t access,snd_pcm_format_t format,\
 
 	//=============================================================================
 
-	err=snd_pcm_hw_params_get_period_size(hw_params,&frames, &dir); /*»ñÈ¡ÖÜÆÚ³¤¶È*/
+	err=snd_pcm_hw_params_get_period_size(hw_params,&frames, &dir); /*èŽ·å–å‘¨æœŸé•¿åº¦*/
 	if(err<0)
 	{
 		perror("\nsnd_pcm_hw_params_get_period_size:");
@@ -269,7 +269,7 @@ snd_pcm_t* micHwInit(snd_pcm_access_t access,snd_pcm_format_t format,\
 
 	snd_pcm_hw_params_free (hw_params);
 
-    //snd_pcm_drop ºÍ snd_pcm_prepare À´ÔÝÍ£ºÍ¼ÌÐøÁË¡£
+    //snd_pcm_drop å’Œ snd_pcm_prepare æ¥æš‚åœå’Œç»§ç»­äº†ã€‚
 	if ((err = snd_pcm_prepare (capture_handle)) < 0) {
    		fprintf (stderr, "cannot prepare audio interface for use (%s)\n",
                  snd_strerror (err));
@@ -317,10 +317,10 @@ void *speechCaptureMain(void *ptr)
 {
 
 	const char*		session_id				= NULL;
-	//char			hints[HINTS_SIZE]		= {'\0'}; //hintsÎª½áÊø±¾´Î»á»°µÄÔ­ÒòÃèÊö£¬ÓÉÓÃ»§×Ô¶¨Òå
-	//int 			aud_stat = MSP_AUDIO_SAMPLE_FIRST;		//ÒôÆµ×´Ì¬
-	//int 			ep_stat = MSP_EP_LOOKING_FOR_SPEECH;		//¶Ëµã¼ì²â
-	//int 			rec_stat = MSP_REC_STATUS_SUCCESS;			//Ê¶±ð×´Ì¬
+	//char			hints[HINTS_SIZE]		= {'\0'}; //hintsä¸ºç»“æŸæœ¬æ¬¡ä¼šè¯çš„åŽŸå› æè¿°ï¼Œç”±ç”¨æˆ·è‡ªå®šä¹‰
+	//int 			aud_stat = MSP_AUDIO_SAMPLE_FIRST;		//éŸ³é¢‘çŠ¶æ€
+	//int 			ep_stat = MSP_EP_LOOKING_FOR_SPEECH;		//ç«¯ç‚¹æ£€æµ‹
+	//int 			rec_stat = MSP_REC_STATUS_SUCCESS;			//è¯†åˆ«çŠ¶æ€
 	//int 			errcode = MSP_SUCCESS;
 	long 			pcm_count 	= 0;
 	long 			pcm_size 	= 0;

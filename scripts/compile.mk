@@ -1,7 +1,7 @@
 CXX:=$(XS_CROSS_COMPILE)g++
 CC:=$(XS_CROSS_COMPILE)gcc
 
-LIBS=-lasound -lxs -lwiringPi -lmsc -lpthread -lasound -ldl -lc
+LIBS=-lpthread
 INCLUDES=-I$(XS_INCLUDE)
 CXXFLAGS=-O2 -Wall -g
 LCXXFLAGS=-L$(XS_LIB)

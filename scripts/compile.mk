@@ -28,7 +28,7 @@ DEPS_TARGET=$(SCP_PREFIX)/.deps
 bin:$(C_OBJS) $(CPP_OBJS)
 	$(CC) -o $(TARGET) $(C_OBJS) $(CPP_OBJS) $(CPPFLAGS) $(C_LDFLAGS) $(CPP_LDFLAGS) $(C_LIBS) $(CPP_LIBS)
 
-lib:$(OBJS)
+lib:$(C_OBJS) $(CPP_OBJS)
 	$(AR) rc $(TARGET) $(C_OBJS) $(CPP_OBJS)
 
 %.oo:%.cpp

@@ -21,10 +21,13 @@ CPP_LDFLAGS = -L$(SCP_LIB)
 CPP_DFLAGS = -M
 
 C_OBJS=$(patsubst %.c, %.lo, $(filter %.c, $(SRCS)))
-C_DEPS=$(patsubst %.c, %.d, $(filter %.c, $(SRCS)))
-
 CPP_OBJS=$(patsubst %.cpp, %.oo, $(filter %.cpp, $(SRCS)))
+OBJS=$(C_OBJS) $(CPP_OBJS)
+
+C_DEPS=$(patsubst %.c, %.d, $(filter %.c, $(SRCS)))
 CPP_DEPS=$(patsubst %.cpp, %.d, $(filter %.cpp, $(SRCS)))
+
+
 
 DEPS_TARGET=$(SCP_PREFIX)/.deps
 
@@ -54,5 +57,4 @@ endif
 clean:
 	rm -rf $(DEPS_TARGET)
 	rm -rf $(TARGET)
-	rm -rf $(CPP_OBJS)
-	rm -rf $(C_OBJS)
+	rm -rf $(OBJS)

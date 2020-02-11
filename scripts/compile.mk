@@ -4,14 +4,17 @@ CC:=$(SCP_CROSS_COMPILE)gcc
 COMPILE:=$(CC)
 
 SRCS += $(C_SRCS) $(CPP_SRCS)
+C_INCLUDE += -I$(SCP_INCLUDE)
+CPP_INCLUDE += -I$(SCP_INCLUDE)
 
-C FLAGS += -I$(SCP_INCLUDE)
 C_FLAGS += -Os -Wall -g
+C_FLAGS += $(C_INCLUDE)
 C_LIBS += -lpthread -ldl -lm
 C_LDFLAGS += -L$(SCP_LIB)
 C_DFLAGS += -M
 
 CPP_FLAGS = -O2 -Wall -g
+CPP_FLAGS += $(CPP_INCLUDE)
 #CPP_LIBS += -lstdc++
 CPP_LIBS += -lstdc++
 CPP_LDFLAGS = -L$(SCP_LIB)
